@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<xhtml xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+       
+        <h:dataTable border="1" var="pro"
+value="#{clienteBean.listaCliente}">
+<h:column>
+<f:facet name="header"> Nome cliente </f:facet>
+#{pro[1]}
+</h:column>
+<h:column>
+<f:facet name="header"> RG </f:facet>
+#{pro[2]}
+</h:column>
+<h:column>
+<f:facet name="header"> Tel </f:facet>
+#{pro[3]}
+</h:column>
+<h:column>
+<f:facet name="header"> Endereco </f:facet>
+#{pro[4]}
+</h:column>
+            <h:column>  
+               <f:facet name="header"> Ação </f:facet>
+               <h:commandLink value="Atualizar" action="editarcliente">
+<f:actionListener binding="#{clienteBean.carregarCliente(pro[0])}"/>
+</h:commandLink>
+               
+               <h:commandLink action="#{clienteBean.excluir(pro[0])}">
+Excluir
+</h:commandLink>
+               
+            </h:column>
+</h:dataTable>
+        </h:form>
+    </h:body>
+</xhtml>
+
