@@ -31,36 +31,35 @@ public class ClienteDao {
         return true;
         } catch(HibernateException erro){
         return false;
-    }
+        }
     }
     
-    public boolean atualizar(Cliente cliente){
+public boolean atualizar(Cliente cliente){
     try{ sessao = HibernateUtil.getSessionFactory().openSession();
-transacao = sessao.beginTransaction();
-sessao.update(cliente);
-transacao.commit();
-return true;
-} catch(HibernateException erro){
-return false;
+    transacao = sessao.beginTransaction();
+    sessao.update(cliente);
+    transacao.commit();
+    return true;
+    } catch(HibernateException erro){
+    return false;
+    }    
 }
     
-}
-    
-    public Cliente recuperaCliente(int id){
-try{
-sessao =
-HibernateUtil.getSessionFactory().openSession();
-transacao = sessao.beginTransaction();
-String sql = "SELECT * FROM cliente WHERE id = :id";
-SQLQuery consulta = sessao.createSQLQuery(sql);
-consulta.setParameter("id", id);
-consulta.addEntity(Cliente.class);
-Cliente cliente = (Cliente)
-consulta.uniqueResult();
-transacao.commit();
-return cliente;
-} catch(HibernateException erro){
-return null;
+public Cliente recuperaCliente(int id){
+    try{
+    sessao =
+    HibernateUtil.getSessionFactory().openSession();
+    transacao = sessao.beginTransaction();
+    String sql = "SELECT * FROM cliente WHERE id = :id";
+    SQLQuery consulta = sessao.createSQLQuery(sql);
+    consulta.setParameter("id", id);
+    consulta.addEntity(Cliente.class);
+    Cliente cliente = (Cliente)
+    consulta.uniqueResult();
+    transacao.commit();
+    return cliente;
+    } catch(HibernateException erro){
+    return null;
 }
 
 
@@ -69,28 +68,28 @@ return null;
     
     
 public List<Object[]> listaTodosClientes(){
-sessao =
-HibernateUtil.getSessionFactory().openSession();
-transacao = sessao.beginTransaction();
-String sql = "SELECT id, nome, rg, tel, endereco FROM cliente ";
-SQLQuery consulta = sessao.createSQLQuery(sql);
-listaCliente = consulta.list();
-transacao.commit();
-return listaCliente;
+    sessao =
+    HibernateUtil.getSessionFactory().openSession();
+    transacao = sessao.beginTransaction();
+    String sql = "SELECT id, nome, rg, tel, endereco FROM cliente ";
+    SQLQuery consulta = sessao.createSQLQuery(sql);
+    listaCliente = consulta.list();
+    transacao.commit();
+    return listaCliente;
 }
 
 public boolean excluir(int id){
-try{ sessao = HibernateUtil.getSessionFactory().openSession();
-transacao = sessao.beginTransaction();
-String sql = "DELETE FROM cliente WHERE id= :id ";
-SQLQuery consulta = sessao.createSQLQuery(sql);
-consulta.setParameter("id", id);
-consulta.executeUpdate();
-transacao.commit();
-return true;
-}catch(HibernateException erro){
-return false;
-}
-    
-}
+    try{ sessao = HibernateUtil.getSessionFactory().openSession();
+    transacao = sessao.beginTransaction();
+    String sql = "DELETE FROM cliente WHERE id= :id ";
+    SQLQuery consulta = sessao.createSQLQuery(sql);
+    consulta.setParameter("id", id);
+    consulta.executeUpdate();
+    transacao.commit();
+    return true;
+    }catch(HibernateException erro){
+    return false;
+    }
+
+    }
 }
